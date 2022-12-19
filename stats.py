@@ -1,6 +1,8 @@
-from db_handler import DBHandler
-import asyncpg
 import asyncio
+
+import asyncpg
+
+from db_handler import DBHandler
 
 
 class Statistics:
@@ -8,21 +10,25 @@ class Statistics:
         self.__database = database
 
     async def get_history_for_user(self, user_id: int):
-        query = f"SELECT search_query " \
-                f"FROM stats " \
-                f"WHERE telegram_user_id = {user_id}"
+        query = (
+            f"SELECT search_query " f"FROM stats " f"WHERE telegram_user_id = {user_id}"
+        )
 
         return await self.__database.execute_query_with_return(query)
 
     async def get_films_count_for_user(self, user_id: int):
-        query = f"SELECT response, count(*) " \
-                f"FROM stats " \
-                f"WHERE telegram_user_id = {user_id} " \
-                f"GROUP BY response " \
-                f"ORDER BY count(*) " \
-                f"DESC;"
+        query = (
+            f"SELECT response, count(*) "
+            f"FROM stats "
+            f"WHERE telegram_user_id = {user_id} "
+            f"GROUP BY response "
+            f"ORDER BY count(*) "
+            f"DESC;"
+        )
 
         return await self.__database.execute_query_with_return(query)
+
+
 #
 #
 # async def run():

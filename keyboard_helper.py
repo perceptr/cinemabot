@@ -6,4 +6,3 @@ class Keyboard:
         self.keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
         self.__buttons = buttons
         self.keyboard.add(*self.__buttons)
-
